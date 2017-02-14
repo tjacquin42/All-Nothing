@@ -1,0 +1,7 @@
+Credentials cache: API:14E17D80-4D7A-472B-8A2D-E00578B67A3E
+        Principal: tjacquin@42.FR
+
+ Issued                Expires               Principal
+Oct 14 11:21:09 2015  Oct 21 11:21:09 2015  krbtgt/42.FR@42.FR
+Oct 14 11:23:24 2015  Oct 21 11:21:09 2015  ldap/ldap-proxy.42.fr@42.FR
+Oct 14 11:41:09 2015  Oct 21 11:21:09 2015  host/vogsphere-frontend-normal-1.42.fr@42.FR
