@@ -1,0 +1,60 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tjacquin <tjacquin@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/02/13 06:38:48 by tjacquin          #+#    #+#             */
+/*   Updated: 2017/02/13 07:41:13 by tjacquin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../fractol.h"
+
+void		draw(t_ol *stk)
+{
+	int color = 16777215;
+	int x1 = 259;
+	int x2 = 247;
+	int y1 = 268;
+	int y2 = 284;
+	int e = -84;
+	int dx = 24;
+	int dy = 32;
+
+	e = x2 - x1;
+	if (x2 < x1)
+		e = x1 - x2;
+	dx = e * 2;
+	dy = (y2 - y1) * 2;
+	if (dy < 0)
+		dy = (y1 - y2) * 2;
+	while (x1 != x2)
+	{
+		if (x1 < 1000 && y1 < 800 && x1 > 0 && y1 > 0)
+			*(unsigned *)(stk->gda + (y1 * stk->szl) +
+					(x1 * stk->bpx / 8)) = truc->color;
+		if (x2 < x1)
+			x1 = x1 - 2;
+		x1 = x1 + 1;
+		if ((e = e - dy) <= 0)
+		{
+			if (y1 > y2)
+				y1 = y1 - 2;
+			y1 = y1 + 1;
+			e = e + dx;
+		}
+}
+
+void		init(int frac, t_ol *stk)
+{
+	frac = 2;
+	stk->mlx = mlx_init();
+	stk->win = mlx_new_window(stk->mlx, 1000, 800, "Fract'ol");
+	stk->img = mlx_new_image(stk->mlx, 1000, 800);
+	stk->gda = mlx_get_data_addr(stk->img, &stk->bpx, &stk->szl, &stk->endl);
+	draw(stk);
+	mlx_put_image_to_window(stk->mlx, stk->win, stk->img, 0, 0);
+	mlx_loop(stk->mlx);
+}
